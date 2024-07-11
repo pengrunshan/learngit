@@ -1,0 +1,61 @@
+mkdir xxx —— 创建文件夹
+cd   xxx ——进入文件夹
+git init——初始化仓库
+
+--------版本添加删除回退等操作--------
+往git版本库添加文件
+git add——添加
+git commit —— 提交更改
+git commit -m "understand how stage works"——修改提交到分支，并备注
+
+git log ——查看历史版本
+git branch——显示分支一览表
+git diff——查看更改前后的差别
+git status——查看仓库的状态
+git reset——回溯历史版本
+git status——获取暂存区状态
+
+git reset ——hard 82ef3(版本号)
+cat xxxx.txt——查看文件
+
+-------远程仓库-------
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联一个远程库时必须给远程库指定一个名字，origin是默认习惯命名；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+
+-------分支管理-------
+git switch -c dev——创建并切换到新的分支dev
+git switch master——切换到master分支
+git branch <name>——创建分支
+git merge <name>——合并某分支到当前分支
+git branch -d <name>——删除分支
+
+$ git merge --no-ff -m "merge with no-ff" dev  	
+准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward;<-m "merge with no-ff">添加描述
+
+git stash ——保存工作现场，BUG修复后再
+git stash pop——回到工作现场
+在master分支上修复的bug，想要合并到当前dev分支，可以用git cherry-pick <commit>命令，把bug提交的修改“复制”到当前分支，
+
+***多人协作
+git push origin <branch-name>——远程推送分支修改
+若因为远程分支较本地更新而推送失败，用git pull爬下来试图合并
+	如果合并有冲突先解决冲突（git merge <name>）
+	如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>
+
+git remote -v——查看远程库
+
+***打标签
+git tag <tagname> ——新建一个标签
+git tag -a <tagname> -m "xxxxxx"——备注标签信息
+git show <tagname> ——显示标签信息
+git tag——查看所有标签
+git push origin <tagname>——推送本地标签
+git push origin --tags ——推送全部本地标签
+git tag -d <tagname>——删除本地标签
+git push origin :refs/tags/<tagname>——删除一个远程标签
